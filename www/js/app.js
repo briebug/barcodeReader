@@ -18,7 +18,7 @@ var barcodeExample = angular.module('starter', ['ionic', 'ngCordova'])
     });
   });
 
-barcodeExample.controller('BarcodeExampleController', function($http, $scope, $ionicPlatform, $cordovaBarcodeScanner, $cordovaTouchID) {
+barcodeExample.controller('BarcodeExampleController', function($http, $scope, $cordovaBarcodeScanner) {
 
   $scope.scanBarcode = function () {
     $cordovaBarcodeScanner.scan()
@@ -33,31 +33,7 @@ barcodeExample.controller('BarcodeExampleController', function($http, $scope, $i
             alert(error);
           });
       }, function (error) {
-        alert('Errs');
-        console.log('an error happened: ' + error)
+        alert('an error has occurred: ' + error);
       });
   };
-
-  onLoad();
-
-  function onLoad () {
-    document.addEventListener("deviceready", onDeviceReady, false);
-  }
-
-  function onDeviceReady() {
-    $cordovaTouchID.checkSupport()
-      .then(function () {
-        $cordovaTouchID.authenticate('Scan your fingerprint please')
-          .then(function() {
-            alert('Scan Successful!')
-          }, function(error) {
-            alert('Scan Failed.');
-            alert(JSON.stringify(error));
-          });
-      }, function(error) {
-        alert('Device not supported.');
-        alert(JSON.stringify(error));
-      });
-  }
-
 });
